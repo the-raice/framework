@@ -1,1 +1,16 @@
-
+{
+    "name": "the-raice/framework",
+    "description": "The core of the Raice Framework components",
+    "keywords": ["framework", "raice", "php", "core"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Raice\\": "src/"
+		}
+    },
+    "minimum-stability": "dev"
+}
