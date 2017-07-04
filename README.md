@@ -1,1 +1,1 @@
-# framework
+# The Raice Framework components
