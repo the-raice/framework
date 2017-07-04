@@ -1,1 +1,1 @@
-# The core code of The Raice Framework
+# The core of The Raice Framework
