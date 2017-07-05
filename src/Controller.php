@@ -12,11 +12,11 @@ class Controller
      */
     public $view;
     
-	/**
-	 * The name of class
-	 *
-	 * @var string
-	 */
+    /**
+     * The name of class
+     *
+     * @var string
+     */
     public $className;
 	
     public function __construct ( $className )
