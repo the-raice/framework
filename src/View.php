@@ -1,8 +1,16 @@
 <?php
 
+/**
+ * The Raice Framework.
+ *
+ * @link 
+ * @copyright Copyright (c) 2017 The Raice Framework
+ * @license 
+ */
+
 namespace Raice;
 
-class View extends Application
+class View
 {
 	
     public function __construct ( $className )
