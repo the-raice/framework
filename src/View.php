@@ -16,8 +16,6 @@ class View
     public function __construct ( $className )
     {
 		
-        parent::__construct();
-		
         $this->render( $className );
         
     }
