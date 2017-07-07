@@ -88,7 +88,7 @@ class Bootstrap
             
         }
 
-        if ( !empty( $this->method ) && class_exists( $this->controllerName ) ) {
+        if ( !empty( $this->method ) ) {
             
             $this->methodName = $this->controllerName . '\\' . $this->method ;
             
@@ -97,25 +97,29 @@ class Bootstrap
                 $this->bootstrap = new $this->methodName;
                 
             } 
-            
-            if( method_exists( $this->controllerName, $this->method ) && empty( $this->argument ) ) {
+    
+            if ( method_exists( $this->controllerName, $this->method ) ) {
                 
                 $this->bootstrap = new $this->controllerName;
-                $this->bootstrap->{$this->method}();
                 
-            } elseif ( !empty( $this->argument ) && method_exists( $this->controllerName, $this->method ) ) {
+                if ( !empty( $this->argument ) ) {
+                    
+                   $this->bootstrap->{$this->method}( $this->argument );
+                    
+                } else {
 
-                $this->bootstrap = new $this->controllerName;
-                $this->bootstrap->{$this->method}( $this->argument );
+                  $this->bootstrap->{$this->method}();
+                    
+                }
                 
             }
-            
+          
         } else {
             
             $this->bootstrap = new $this->controllerName;
             
         }
         
-    }
-    
+	}
+
 }
