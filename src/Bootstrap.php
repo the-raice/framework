@@ -21,7 +21,7 @@ class Bootstrap
     protected $url;
     
     /**
-     * The name of the controller
+     * The name of the controller from URL
      *
      * @var string
      */
@@ -56,26 +56,23 @@ class Bootstrap
     protected $bootstrap;
     
     /**
-     * The supported extensions of files that are in public/assets
+     * The full name of the controller
      *
-     * @var array
+     * @var string
      */
-    protected $extensions = ['css', 'js'];
+    protected $controllerName;
+    
+    /**
+     * The path to 
+     *
+     *
+     */
+    protected $methodName;
     
     public function __construct ( )
     {
-        
+
         $this->url = explode('/', $_SERVER['REQUEST_URI']);
-        
-        foreach ( $this->extensions as $extension ) {
-            
-            if ( $extension == $this->url[2] ) {
-                
-                return require ROOT . $_SERVER['REQUEST_URI'];
-                
-            }
-            
-         }
         
         $this->controller = ucfirst($this->url[1]);
         $this->method = ucfirst($this->url[2]);
@@ -83,38 +80,39 @@ class Bootstrap
         
         if ( empty( $this->controller ) ) {
             
-            $this->controller = 'Controllers\Welcome';
+            $this->controllerName = '\Controllers\Welcome';
             
         } else {
             
-            $this->controller = 'Controllers\\' . $this->controller;
+            $this->controllerName = '\Controllers\\' . $this->controller;
             
         }
+
+        if ( !empty( $this->method ) && class_exists( $this->controllerName ) ) {
             
-        $this->file = ROOT_PATH . 'protected/' . $this->controller . '.php';
-        
-         if ( file_exists( $this->file ) ) {
+            $this->methodName = $this->controllerName . '\\' . $this->method ;
             
-            require $this->file;
+            if ( class_exists( $this->methodName ) ) {
+                
+                $this->bootstrap = new $this->methodName;
+                
+            } 
+            
+            if( method_exists( $this->controllerName, $this->method ) && empty( $this->argument ) ) {
+                
+                $this->bootstrap = new $this->controllerName;
+                $this->bootstrap->{$this->method}();
+                
+            } elseif ( !empty( $this->argument ) && method_exists( $this->controllerName, $this->method ) ) {
+
+                $this->bootstrap = new $this->controllerName;
+                $this->bootstrap->{$this->method}( $this->argument );
+                
+            }
             
         } else {
             
-             throw new \Exception('The ' . $this->controller . ' doesn\'t exist!');
-             return false;
-           
-        }
-        
-        $this->bootstrap = new $this->controller;
-        
-        if ( !empty( $this->method ) && method_exists( $this->bootstrap, $this->method ) ) {
-            
-            $this->bootstrap->{$this->method}();
-            
-        }
-        
-        if ( !empty( $this->argument ) && method_exists( $this->bootstrap, $this->method ) ) {
-            
-            $this->bootstrap->{$this->method}( $this->argument );
+            $this->bootstrap = new $this->controllerName;
             
         }
         
