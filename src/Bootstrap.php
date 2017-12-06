@@ -56,16 +56,16 @@ class Bootstrap
     protected $bootstrap;
     
     /**
-     * The full name of the controller
+     * Full name of the controller
      *
      * @var string
      */
     protected $controllerName;
     
     /**
-     * The path to 
+     * Full name of the method
      *
-     *
+     * @var string
      */
     protected $methodName;
     
@@ -74,13 +74,13 @@ class Bootstrap
 
         $this->url = explode('/', $_SERVER['REQUEST_URI']);
         
-        $this->controller = ucfirst($this->url[1]);
-        $this->method = ucfirst($this->url[2]);
+        $this->controller = ucfirst( $this->url[1] );
+        $this->method = ucfirst( $this->url[2] );
         $this->argument = $this->url[3];
         
         if ( empty( $this->controller ) ) {
             
-            $this->controllerName = '\Controllers\Welcome';
+            $this->controllerName = '\Controllers\Home';
             
         } else {
             
@@ -92,11 +92,11 @@ class Bootstrap
             
             $this->methodName = $this->controllerName . '\\' . $this->method ;
             
-            if ( class_exists( $this->methodName ) ) {
+            /*if ( class_exists( $this->methodName ) ) {
                 
                 $this->bootstrap = new $this->methodName;
                 
-            } 
+            }*/
     
             if ( method_exists( $this->controllerName, $this->method ) ) {
                 
