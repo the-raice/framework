@@ -18,13 +18,44 @@ class Model
      *
      * @var object
      */
-    protected $database;
+    protected static $database;
     
     public function __construct ()
     {
         
-        $this->database = new Database();
+        
         
     }
-    
+	
+	public function getAll ( )
+	{
+		
+		$database = Database::instance();
+		$sql = "SELECT * FROM " . static::TABLE;
+		$result = $database->query($sql);
+		
+		return $result;
+		
+    }	
+	
+	public function getOneById ( $id )
+	{
+		
+		$database = Database::instance();
+		$sql = "SET profiling=1; SELECT * FROM " . static::TABLE . " WHERE id=:id";
+		$result = $database->query( $sql, ['id' => $id] );
+		return $result;
+		
+    }
+	
+	public function getOneByField ( $value, $field )
+	{
+
+		$database = Database::instance();
+		$sql = "SELECT * FROM " . static::TABLE . " WHERE :field=:value";
+		$result = $database->query( $sql, ['field' => $field, 'value' => $value] );
+		
+		return $result;
+		
+    }
 }
