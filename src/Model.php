@@ -42,7 +42,7 @@ class Model
 	{
 		
 		$database = Database::instance();
-		$sql = "SET profiling=1; SELECT * FROM " . static::TABLE . " WHERE id=:id";
+		$sql = "SELECT * FROM " . static::TABLE . " WHERE id=:id";
 		$result = $database->query( $sql, ['id' => $id] );
 		return $result;
 		
