@@ -10,14 +10,45 @@
 
 namespace Raice;
 
-class Database extends \PDO
+class Database 
 {
-    
-    public function __construct ()
-    {
-        
-        parent::__construct('mysql:host=localhost;dbname=test', 'root', '');
-        
+	
+	use traits\Singleton;
+	
+	protected $dbh;
+
+	protected function __construct ()
+	{
+
+		try {
+			
+			$this->dbh = new \PDO('mysql:host=localhost;dbname=test', 'root', '');
+			
+		} catch ( \PDOException $e ) {
+			
+			throw new Exception( $e->getMessage() );
+			
+		}
+		
+	}
+	
+	public function query( $sql, array $data = [] )
+	{
+		
+		$sth = $this->dbh->prepare($sql);
+		
+		$result = $sth->execute($data);
+
+		if ( $result ) {
+			
+			return $sth->fetchAll();
+			
+		} else {
+			
+			throw new \Exception('SQL-error!');
+			
+		}
+		
     }
     
 }
