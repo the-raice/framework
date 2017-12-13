@@ -87,12 +87,12 @@ class Bootstrap
             $this->controllerName = '\Controllers\\' . $this->controller;
             
         }
-	
-	$this->bootstrap = new $this->controllerName;
-	    
+    
+        $this->bootstrap = new $this->controllerName;
+        
         if ( !empty( $this->method ) ) {
 
-            $this->methodName = $this->controllerName . '\\' . $this->method ;
+            $this->methodName = $this->controllerName . '\\' . $this->method;
     
             if ( method_exists( $this->controllerName, $this->method ) || method_exists( $this->controllerName, '__call' ) ) {
  
@@ -108,15 +108,16 @@ class Bootstrap
                 
             } else {
 
-			$this->bootstrap->index();
-				
-		}
+            $this->bootstrap->index();
+                
+        }
           
         } else {
 
-		$this->bootstrap->index();
+            $this->bootstrap->index();
             
         }
         
     }
-
+    
+}
