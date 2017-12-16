@@ -27,7 +27,7 @@ class Controller
      */
     public $className;
 	
-    public function __construct ( $className )
+    public function getView ( $className )
     {
         
         $this->view = new View( $className );
