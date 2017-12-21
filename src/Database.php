@@ -26,7 +26,7 @@ class Database
 			
 		} catch ( \PDOException $e ) {
 			
-			throw new Exception( $e->getMessage() );
+			throw new \Exception( $e->getMessage() );
 			
 		}
 		
