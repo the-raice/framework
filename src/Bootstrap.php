@@ -74,7 +74,7 @@ class Bootstrap
 
         $this->url = explode('/', $_SERVER['REQUEST_URI']);
         
-        $this->controller = ucfirst( $this->url[1] );
+        $this->controller = ucfirst( str_replace( '-', '', $this->url[1]) );
         $this->method = ucfirst( $this->url[2] );
         $this->argument = $this->url[3];
         
