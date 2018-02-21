@@ -27,7 +27,7 @@ class Model
         
     }
     
-    public function getAll ( )
+    public static function getAll ( )
     {
         
         $database = Database::instance();
@@ -52,10 +52,55 @@ class Model
     {
 
         $database = Database::instance();
-        $sql = "SELECT * FROM " . static::TABLE . " WHERE :field=:value";
-        $result = $database->query( $sql, ['field' => $field, 'value' => $value] );
+        $sql = "SELECT * FROM " . static::TABLE . " WHERE $field=:value";
+        $result = $database->query( $sql, ['value' => $value] );
         
         return $result;
         
     }
+    
+    public function getOneByTwoFields ( $value1, $field1, $value2, $field2 )
+    {
+
+        $database = Database::instance();
+        $sql = "SELECT * FROM " . static::TABLE . " WHERE $field1=:value1 AND $field2=:value2";
+        
+        $result = $database->query( $sql, [
+                                            'value1' => $value1, 
+                                            'value2' => $value2
+                                           ] 
+                                   );
+        
+        return $result;
+        
+    }
+    
+    public function update ( $query, $value, $field ) {
+        
+        $database = Database::instance();
+        $sql = "UPDATE " . static::TABLE . " SET $query WHERE $field=:value";
+        
+        $result = $database->query( $sql, ['value' => $value]);
+        
+    }
+    
+    public function insert ( $values )
+    {
+        
+        $database = Database::instance();
+        $sql = "INSERT INTO " . static::TABLE . " VALUES($values)";
+        $result = $database->query( $sql );
+        
+    }
+    
+    public function delete ( $value, $field )
+    {
+        
+        $database = Database::instance();
+        $sql = "DELETE FROM " . static::TABLE . " WHERE $field=:value";
+        $result = $database->query( $sql, ['value' => $value] );
+        
+    }
+    
 }
+
