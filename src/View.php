@@ -22,10 +22,12 @@ class View
     
     public function render ( $className )
     {
-		
-        require ROOT_PATH . 'protected/Views/header.php';
-        require ROOT_PATH . 'protected/Views/' . $className . '/' . $className . '.php';
-        require ROOT_PATH . 'protected/Views/footer.php';
+        
+        $className = str_replace('\\', '/', $className);
+        $class = strtolower($className);
+        require __DIR__ . '/../../../../protected/views/Header.php';
+        require __DIR__ . '/../../../../protected/views/' . $className . '.php';
+        require __DIR__ . '/../../../../protected/views/Footer.php';
         
     }
     
