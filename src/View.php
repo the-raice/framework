@@ -13,14 +13,14 @@ namespace Raice;
 class View
 {
 	
-    public function __construct ( $className )
+    public function __construct ( $className, $title )
     {
 		
-        $this->render( $className );
+        $this->render( $className, $title );
         
     }
     
-    public function render ( $className )
+    public function render ( $className, $title )
     {
         
         $className = str_replace('\\', '/', $className);
