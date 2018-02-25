@@ -27,10 +27,10 @@ class Controller
      */
     public $className;
 	
-    public function getView ( $className )
+    public function getView ( $className, $title )
     {
         
-        $this->view = new View( $className );
+        $this->view = new View( $className, $title );
         
     }
     
