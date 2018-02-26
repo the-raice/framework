@@ -23,8 +23,17 @@ class View
     public function render ( $className, $title )
     {
         
+        $settings = \Models\Settings::getAll()[0];
+        
+        if ( $title != $settings['title'] ) {
+        
+            $title = $title . ' | ' . $settings['title'];
+        
+        }
+        
         $className = str_replace('\\', '/', $className);
         $class = strtolower($className);
+        
         require __DIR__ . '/../../../../protected/views/Header.php';
         require __DIR__ . '/../../../../protected/views/' . $className . '.php';
         require __DIR__ . '/../../../../protected/views/Footer.php';
