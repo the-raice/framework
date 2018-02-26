@@ -27,7 +27,7 @@ class View
         
         if ( $title != $settings['title'] ) {
         
-            $title = $title . ' | ' . $settings['title'];
+            $title = $title . ' — ' . $settings['title'];
         
         }
         
