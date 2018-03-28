@@ -19,10 +19,12 @@ class Database
 
 	protected function __construct ()
 	{
-
+        
+        require __DIR__ . '/../../../../protected/config/database.php';
+        
 		try {
 			
-			$this->dbh = new \PDO('mysql:host=localhost;dbname=test', 'root', '');
+			$this->dbh = new \PDO('mysql:host='  . $database['host'] . ';dbname='  . $database['name'], $database['user'], $database['password']);
 			
 		} catch ( \PDOException $e ) {
 			
@@ -52,3 +54,4 @@ class Database
     }
     
 }
+
