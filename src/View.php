@@ -23,12 +23,16 @@ class View
     public function render ( $className, $title )
     {
         
-        $settings = \Models\Settings::getAll()[0];
+        if ( class_exists('\Models\Settings') ) {
         
-        if ( $title != $settings['title'] ) {
-        
-            $title = $title . ' — ' . $settings['title'];
-        
+            $settings = \Models\Settings::getAll()[0];
+            
+            if ( $title != $settings['title'] ) {
+            
+                $title = $title . ' — ' . $settings['title'];
+            
+            }
+            
         }
         
         $className = str_replace('\\', '/', $className);
