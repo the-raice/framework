@@ -4,7 +4,7 @@
  * The Raice Framework.
  *
  * @link 
- * @copyright Copyright (c) 2017 The Raice Framework
+ * @copyright Copyright (c) 2019 The Raice Framework
  * @license 
  */
 
@@ -101,6 +101,13 @@ class Model
         $result = $database->query( $sql, ['value' => $value] );
         
     }
+	
+	public function truncate ( ) {
+		
+		$database = Database::instance();
+        $sql = "TRUNCATE TABLE" . static::TABLE;
+		
+	}
     
 }
 
