@@ -88,7 +88,7 @@ class Model
     {
         
         $database = Database::instance();
-        $sql = "INSERT INTO " . static::TABLE . " VALUES($values)";
+        $sql = "INSERT INTO " . static::TABLE . " VALUES($values)";var_dump($sql);
         $result = $database->query( $sql );
         
     }
@@ -106,8 +106,8 @@ class Model
 		
 		$database = Database::instance();
         $sql = "TRUNCATE TABLE" . static::TABLE;
+		$database->query( $sql );
 		
 	}
     
 }
-
