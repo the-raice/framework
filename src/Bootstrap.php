@@ -4,7 +4,7 @@
  * The Raice Framework.
  *
  * @link 
- * @copyright Copyright (c) 2017 The Raice Framework
+ * @copyright Copyright (c) 2019 The Raice Framework
  * @license 
  */
 
@@ -74,8 +74,8 @@ class Bootstrap
 
         $this->url = explode('/', $_SERVER['REQUEST_URI']);
         
-        $this->controller = ucfirst( str_replace( '-', '', $this->url[1]) );
-        $this->method = ucfirst( $this->url[2] );
+        $this->controller = ucfirst( str_replace( '-', '', strtolower($this->url[1])) );
+        $this->method = ucfirst( strtolower($this->url[2]) );
         $this->argument = $this->url[3];
         
         if ( empty( $this->controller ) ) {
