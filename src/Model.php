@@ -83,15 +83,16 @@ class Model
         $result = $database->query( $sql, ['value' => $value]);
         
     }
-    
-    public function insert ( $values )
+        
+    public function insert ( $fields, $values )
     {
         
         $database = Database::instance();
-        $sql = "INSERT INTO " . static::TABLE . " VALUES($values)";var_dump($sql);
+        $sql = "INSERT INTO " . static::TABLE . " ($fields) VALUES($values)";
         $result = $database->query( $sql );
         
     }
+    
     
     public function delete ( $value, $field )
     {
@@ -102,12 +103,12 @@ class Model
         
     }
 	
-	public function truncate ( ) {
+    public function truncate ( ) {
 		
-		$database = Database::instance();
+        $database = Database::instance();
         $sql = "TRUNCATE TABLE" . static::TABLE;
-		$database->query( $sql );
+        $database->query( $sql );
 		
-	}
+    }
     
 }
