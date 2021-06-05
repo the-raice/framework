@@ -4,7 +4,7 @@
  * The Raice Framework.
  *
  * @link 
- * @copyright Copyright (c) 2019 The Raice Framework
+ * @copyright Copyright (c) 2017 The Raice Framework
  * @license 
  */
 
@@ -38,7 +38,7 @@ class Model
         
     }    
     
-    public function getOneById ( $id )
+    public static function getOneById ( $id )
     {
         
         $database = Database::instance();
@@ -48,7 +48,7 @@ class Model
         
     }
     
-    public function getOneByField ( $value, $field )
+    public static function getOneByField ( $value, $field )
     {
 
         $database = Database::instance();
@@ -59,7 +59,7 @@ class Model
         
     }
     
-    public function getOneByTwoFields ( $value1, $field1, $value2, $field2 )
+    public static function getOneByTwoFields ( $value1, $field1, $value2, $field2 )
     {
 
         $database = Database::instance();
@@ -75,7 +75,7 @@ class Model
         
     }
     
-    public function update ( $query, $value, $field ) {
+    public static function update ( $query, $value, $field ) {
         
         $database = Database::instance();
         $sql = "UPDATE " . static::TABLE . " SET $query WHERE $field=:value";
@@ -83,18 +83,17 @@ class Model
         $result = $database->query( $sql, ['value' => $value]);
         
     }
-        
-    public function insert ( $fields, $values )
+    
+    public static function insert ( $values )
     {
         
         $database = Database::instance();
-        $sql = "INSERT INTO " . static::TABLE . " ($fields) VALUES($values)";
+        $sql = "INSERT INTO " . static::TABLE . " VALUES($values)";
         $result = $database->query( $sql );
         
     }
     
-    
-    public function delete ( $value, $field )
+    public static function delete ( $value, $field )
     {
         
         $database = Database::instance();
@@ -102,13 +101,6 @@ class Model
         $result = $database->query( $sql, ['value' => $value] );
         
     }
-	
-    public function truncate ( ) {
-		
-        $database = Database::instance();
-        $sql = "TRUNCATE TABLE" . static::TABLE;
-        $database->query( $sql );
-		
-    }
     
 }
+
