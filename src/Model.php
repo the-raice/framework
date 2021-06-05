@@ -84,11 +84,11 @@ class Model
         
     }
     
-    public static function insert ( $values )
+    public static function insert ( $values, $fields )
     {
         
         $database = Database::instance();
-        $sql = "INSERT INTO " . static::TABLE . " VALUES($values)";
+        $sql = "INSERT INTO " . static::TABLE . " ($fields) VALUES($values)";
         $result = $database->query( $sql );
         
     }
